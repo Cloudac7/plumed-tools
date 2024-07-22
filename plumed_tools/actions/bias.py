@@ -2,7 +2,9 @@ from typing import Optional
 from pydantic import BaseModel
 from pydantic import field_validator, validator
 
+
 class Wall(BaseModel):
+    LABEL: Optional[str] = None
     ARG: list[str]
     AT: list[float]
     KAPPA: list[float]
@@ -11,17 +13,21 @@ class Wall(BaseModel):
     EPS: float = 1.0
     NUMERICAL_DERIVATIVES: bool = False
 
+
 class UPPER_WALLS(Wall):
     pass
 
+
 class LOWER_WALLS(Wall):
     pass
+
 
 class METAD(BaseModel):
     ARG: list[str]
     SIGMA: list[float]
     PACE: int
     FILE: str = "HILLS"
+    LABEL: Optional[str] = None
 
     NUMERICAL_DERIVATIVES: Optional[bool] = False
     CALC_WORK: Optional[bool] = False
@@ -79,11 +85,15 @@ class METAD(BaseModel):
         bias_factor = values.get('BIASFACTOR')
         damp_factor = values.get('DAMPFACTOR')
         if not height and (not tau or not (bias_factor or damp_factor)):
-            raise ValueError("HEIGHT is compulsory unless TAU and either BIASFACTOR or DAMPFACTOR are given")
+            raise ValueError(
+                "HEIGHT is compulsory unless TAU and either BIASFACTOR or DAMPFACTOR are given")
         return height
+
 
 class OPES_METAD_EXPLORE(BaseModel):
     ARG: list[str]
+    LABEL: Optional[str] = None
+
     TEMP: Optional[float] = -1.0
     PACE: int
     SIGMA: Optional[list[float]] = None
@@ -115,8 +125,11 @@ class OPES_METAD_EXPLORE(BaseModel):
     UPDATE_FROM: Optional[float] = None
     UPDATE_UNTIL: Optional[float] = None
 
+
 class OPES_METAD(BaseModel):
     ARG: list[str]
+    LABEL: Optional[str] = None
+
     TEMP: Optional[float] = -1.0
     PACE: int
     SIGMA: Optional[list[float]] = None

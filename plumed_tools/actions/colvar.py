@@ -6,6 +6,7 @@ from plumed_tools.actions.group import GROUP
 
 class DISTANCE(BaseModel):
     ATOMS: GROUP
+    LABEL: Optional[str] = None
     NUMERICAL_DERIVATIVES: Optional[bool] = False
     NOPBC: Optional[bool] = False
     COMPONENTS: Optional[bool] = False
@@ -20,6 +21,7 @@ class DISTANCE(BaseModel):
 
 class ANGLE(BaseModel):
     ATOMS: GROUP
+    LABEL: Optional[str] = None
     NUMERICAL_DERIVATIVES: Optional[bool] = False
     NOPBC: Optional[bool] = False
 
@@ -38,6 +40,7 @@ class TORSION(BaseModel):
 
     ATOMS: Optional[GROUP] = None
     VECTOR: Optional[TORSION_VECTOR] = None
+    LABEL: Optional[str] = None
     NUMERICAL_DERIVATIVES: Optional[bool] = False
     NOPBC: Optional[bool] = False
 
@@ -64,6 +67,7 @@ class TORSION(BaseModel):
 class COORDINATION(BaseModel):
     GROUPA: GROUP
     GROUPB: GROUP
+    LABEL: Optional[str] = None
     NN: int = 6
     MM: int = 0
     D_0: float= 0.0
